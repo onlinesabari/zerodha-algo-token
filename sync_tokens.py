@@ -37,7 +37,7 @@ def sync_to_mysql():
     print(f"🔌 Connecting to remote MySQL database at {db_host}...")
     
     # Create the MySQL connection engine
-    engine = create_engine(f"mysql+pymysql://{db_user}:{db_pass}@{db_host}/{db_name}")
+    engine = create_engine(f"mysql+pymysql://{db_user}:{db_password}@{db_host}/{db_name}")
     
     # Push the data! 'if_exists="replace"' automatically drops yesterday's table and builds a fresh one
     df.to_sql('zerodha_tokens', con=engine, if_exists='replace', index=False)
