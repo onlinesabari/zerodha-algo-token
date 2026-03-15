@@ -1,4 +1,12 @@
 import os
+
+# This safely prints the names of the variables Python can see, 
+# WITHOUT printing your actual password.
+print("Available Environment Variables:")
+for key in os.environ.keys():
+    if key.startswith("DB_"):
+        print(f"Found: {key}")
+        
 import pandas as pd
 from sqlalchemy import create_engine
 
