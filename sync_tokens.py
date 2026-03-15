@@ -20,12 +20,18 @@ def sync_to_mysql():
     df = df[['instrument_token', 'tradingsymbol', 'exchange']]
     
     # Grab the database credentials from GitHub Secrets
-    db_user = os.getenv("DB_USER")
-    db_pass = os.getenv("DB_PASSWORD")
-    db_host = os.getenv("DB_HOST")
-    db_name = os.getenv("DB_NAME")
-    
-    if not all([db_user, db_pass, db_host, db_name]):
+    db_host = os.environ.get("DB_HOST")
+    db_user = os.environ.get("DB_USER")
+    db_password = os.environ.get("DB_PASSWORD")
+    db_name = os.environ.get("DB_NAME")
+
+    # This will print True if it has a value, and False if it is blank
+    print(f"DB_HOST is loaded: {bool(db_host)}")
+    print(f"DB_USER is loaded: {bool(db_user)}")
+    print(f"DB_PASSWORD is loaded: {bool(db_password)}")
+    print(f"DB_NAME is loaded: {bool(db_name)}")
+
+    if not all([db_host, db_user, db_password, db_name]):
         raise Exception("Database credentials missing from environment variables!")
 
     print(f"🔌 Connecting to remote MySQL database at {db_host}...")
